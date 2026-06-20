@@ -1,0 +1,100 @@
+<style>
+
+/* Sakura & Amplop Jatuh Dari Atas */
+
+.coin{
+position:fixed;
+top:-120px;
+pointer-events:none;
+user-select:none;
+z-index:1;
+opacity:.9;
+animation:sakuraFall linear infinite;
+filter:drop-shadow(0 0 8px rgba(255,255,255,.4));
+}
+
+@keyframes sakuraFall{
+
+0%{
+transform:
+translateY(-150px)
+translateX(0px)
+rotate(0deg);
+opacity:0;
+}
+
+10%{
+opacity:1;
+}
+
+25%{
+transform:
+translateY(25vh)
+translateX(-30px)
+rotate(90deg);
+}
+
+50%{
+transform:
+translateY(50vh)
+translateX(40px)
+rotate(180deg);
+}
+
+75%{
+transform:
+translateY(75vh)
+translateX(-20px)
+rotate(270deg);
+}
+
+100%{
+transform:
+translateY(120vh)
+translateX(80px)
+rotate(360deg);
+opacity:0;
+}
+
+}
+
+</style>
+
+<script>
+
+/* Sakura + Amplop */
+
+const items = [
+"🌸","🌸","🌸","🌸","🌸",
+"🌸","🌸","🌸",
+"💮","🌺",
+"🧧","🧧",
+"💌"
+];
+
+for(let i=0;i<80;i++){
+
+const c = document.createElement("div");
+
+c.className = "coin";
+
+c.innerHTML =
+items[Math.floor(Math.random()*items.length)];
+
+c.style.left =
+Math.random()*100 + "vw";
+
+c.style.fontSize =
+(18 + Math.random()*22) + "px";
+
+c.style.animationDuration =
+(10 + Math.random()*10) + "s";
+
+c.style.animationDelay =
+Math.random()*10 + "s";
+
+document.body.appendChild(c);
+
+}
+
+</script>
