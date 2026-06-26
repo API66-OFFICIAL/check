@@ -3,77 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promo Spesial</title>
-    <!-- Masukkan Kode Meta Pixel / Google Analytics Anda di sini -->
+    <title>Landing Page Promo</title>
 </head>
 <body>
 
-    <!-- Konten Landing Page yang Akan Berubah Dinamis -->
-    <div id="landing-page" style="text-align: center; padding: 20px; font-family: Arial, sans-serif;">
-        <img id="promo-gambar" src="default-banner.jpg" alt="Promo" style="max-width: 100%; height: auto; border-radius: 8px;">
-        <h1 id="promo-judul">Memuat Promo...</h1>
-        <p id="promo-deskripsi">Silakan tunggu sebentar.</p>
-        <a id="promo-tombol" href="#" style="display: inline-block; padding: 12px 24px; background-color: #25D366; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
-            Hubungi WhatsApp
+    <!-- AREA KONTEN: Isi bagian ini akan berubah otomatis sesuai link ?p= -->
+    <div id="konten-landing-page" style="text-align: center; font-family: sans-serif; padding: 20px;">
+        <h1 id="judul-promo">Memuat Halaman...</h1>
+        <p id="deskripsi-promo">Mohon tunggu sebentar.</p>
+        <a id="tombol-action" href="#" style="display:inline-block; padding:10px 20px; background:#25D366; color:white; text-decoration:none; border-radius:5px; font-weight:bold;">
+            Hubungi Kami
         </a>
     </div>
 
     <script>
-        // Data Konten untuk 10 Promo Berbeda
-        const databasePromo = {
+        // 1. DAFTAR 10 PROMO ANDA (Silakan ubah teks/link di bawah ini sesuai kebutuhan)
+        const daftarPromo = {
             'promo1': {
-                judul: "Diskon 50% Skincare Pemutih Wajah",
-                deskripsi: "Khusus hari ini! Dapatkan paket lengkap skincare glowing hemat setengah harga. Stok terbatas!",
-                gambar: "https://url-gambar-anda.com",
+                judul: "Promo Dashboard Utama - Diskon 50%",
+                deskripsi: "Khusus untuk Anda yang datang dari iklan Meta. Dapatkan diskon setengah harga hari ini saja!",
                 link_wa: "https://wa.me"
             },
             'promo2': {
-                judul: "Promo Buy 1 Get 1 Sepatu Olahraga",
-                deskripsi: "Beli 1 pasang sepatu lari, gratis 1 pasang bebas pilih model. Gratis ongkir seluruh Indonesia!",
-                gambar: "https://url-gambar-anda.com",
+                judul: "Promo Spesial 2 - Beli 1 Gratis 1",
+                deskripsi: "Kejutan akhir bulan! Beli produk A gratis produk B. Stok terbatas untuk 50 orang pertama.",
                 link_wa: "https://wa.me"
             },
-            // ... Tambahkan 'promo3' sampai 'promo10' dengan format yang sama ...
-            'promo10': {
-                judul: "Cuci Gudang Jam Tangan Pria",
-                deskripsi: "Jam tangan elegan pria diskon hingga 70%. Garansi resmi 1 tahun.",
-                gambar: "https://url-gambar-anda.com",
+            'promo3': {
+                judul: "Promo Spesial 3 - Gratis Ongkir",
+                deskripsi: "Belanja minimal 50 ribu, gratis ongkos kirim ke seluruh wilayah Indonesia tanpa syarat.",
                 link_wa: "https://wa.me"
             }
+            // Anda tinggal meneruskan polanya sampai 'promo10' di sini...
         };
 
-        function muatPromoIklan() {
-            // 1. Ambil parameter '?p=' dari URL Meta Ads
-            const urlParams = new URLSearchParams(window.location.search);
-            const parameterPromo = urlParams.get('p');
+        // 2. FUNGSI UNTUK MEMBACA URL (?p=...)
+        function prosesUrlParameter() {
+            // Mengambil parameter '?p=' dari URL browser
+            const parameterUrl = new URLSearchParams(window.location.search);
+            const namaPromo = parameterUrl.get('p'); 
 
-            // 2. Ambil elemen HTML
-            const elemenJudul = document.getElementById('promo-judul');
-            const elemenDeskripsi = document.getElementById('promo-deskripsi');
-            const elemenGambar = document.getElementById('promo-gambar');
-            const elemenTombol = document.getElementById('promo-tombol');
+            // Menghubungkan ke elemen HTML
+            const elemenJudul = document.getElementById('judul-promo');
+            const elemenDeskripsi = document.getElementById('deskripsi-promo');
+            const elemenTombol = document.getElementById('tombol-action');
 
-            // 3. Cek apakah parameter ada di database kita
-            if (parameterPromo && databasePromo[parameterPromo]) {
-                const data = databasePromo[parameterPromo];
+            // Cek apakah kode promo di URL terdaftar di daftarPromo di atas
+            if (namaPromo && daftarPromo[namaPromo]) {
+                const data = daftarPromo[namaPromo];
                 
-                // Ubah konten secara dinamis
+                // Ganti teks & link tombol secara otomatis
                 elemenJudul.innerText = data.judul;
                 elemenDeskripsi.innerText = data.deskripsi;
-                elemenGambar.src = data.gambar;
                 elemenTombol.href = data.link_wa;
-                elemenTombol.innerText = "Beli Sekarang via WhatsApp";
+                elemenTombol.innerText = "Ambil Promo via WhatsApp";
             } else {
-                // Tampilan Default jika orang masuk tanpa link iklan (halaman utama)
-                elemenJudul.innerText = "Selamat Datang di Toko Kami";
-                elemenDeskripsi.innerText = "Temukan berbagai promo menarik dengan melihat iklan terbaru kami di Instagram dan Facebook.";
-                elemenGambar.src = "banner-utama.jpg"; 
-                elemenTombol.style.display = "none"; // Sembunyikan tombol WA di halaman utama
+                // Tampilan JIKA orang membuka link biasa tanpa '?p=' (Halaman Utama)
+                elemenJudul.innerText = "Selamat Datang di Toko Resmi Kami";
+                elemenDeskripsi.innerText = "Silakan lihat-lihat katalog produk terbaik kami di bawah ini atau cek iklan Instagram kami.";
+                elemenTombol.style.display = "none"; // Sembunyikan tombol WA di halaman utama jika tidak perlu
             }
         }
 
-        // Jalankan fungsi otomatis saat halaman terbuka
-        window.addEventListener('DOMContentLoaded', muatPromoIklan);
+        // Jalankan fungsi saat halaman selesai dimuat oleh browser
+        window.addEventListener('DOMContentLoaded', prosesUrlParameter);
     </script>
+
 </body>
 </html>
